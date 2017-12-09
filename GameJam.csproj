@@ -230,9 +230,11 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\DamageDealer.cs" />
     <Compile Include="Assets\Scripts\DragNDrop.cs" />
+    <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\ItemSnap.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerDrag.cs" />
+    <Compile Include="Assets\Scripts\PlayerRotate.cs" />
     <Compile Include="Assets\Scripts\SelectCharacter.cs" />
   </ItemGroup>
   <ItemGroup>

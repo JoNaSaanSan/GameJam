@@ -14,29 +14,30 @@ public class SelectCharacter : MonoBehaviour {
         {
         rigidbody = Characters[i].GetComponent<Rigidbody>();
         rigidbody.isKinematic = true;
+            Characters[i].SetActive(false);
         }
         current = 0;
+        Characters[current].SetActive(true);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        Characters[0].SetActive(false);
-        Characters[1].SetActive(false);
-
     }
 
     public void Next()
     {
-        Characters[current % Characters.Length - 1].SetActive(false);
-        Characters[(current+1)% Characters.Length - 1].SetActive(true);
+        Characters[current % Characters.Length].SetActive(false);
+        current++;
+        Characters[current% Characters.Length].SetActive(true);
         Debug.Log(current % Characters.Length);
     }
 
     public void Back()
     {
-        Characters[current % Characters.Length - 1].SetActive(false);
-        Characters[(current % Characters.Length - 1) -1 ].SetActive(true);
+        Characters[current % Characters.Length].SetActive(false);
+        current--;
+        Characters[current % Characters.Length].SetActive(true);
         Debug.Log(current % Characters.Length);
     }
 }
