@@ -230,8 +230,10 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\DamageDealer.cs" />
     <Compile Include="Assets\Scripts\DragNDrop.cs" />
+    <Compile Include="Assets\Scripts\ItemSnap.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerDrag.cs" />
+    <Compile Include="Assets\Scripts\SelectCharacter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Game Jam Template\Fonts\OpenSans\License!.txt" />

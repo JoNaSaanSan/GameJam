@@ -6,6 +6,7 @@ TagManager:
   tags:
   - player_1
   - player_2
+  - 12
   layers:
   - Default
   - TransparentFX
