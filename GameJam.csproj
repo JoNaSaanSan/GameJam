@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4B918598-3D78-06A9-514E-E8460B121790}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
@@ -212,16 +212,30 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/Tommi/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
+      <HintPath>C:/Users/Jonat/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/Tommi/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/Jonat/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Game Jam Template\Scripts\DontDestroy.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\Pause.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\PlayMusic.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\QuitApplication.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\SetAudioLevels.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\ShowPanels.cs" />
+    <Compile Include="Assets\Game Jam Template\Scripts\StartOptions.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\DamageDealer.cs" />
+    <Compile Include="Assets\Scripts\DragNDrop.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\PlayerDrag.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Game Jam Template\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Game Jam Template\GameJamTemplateReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
