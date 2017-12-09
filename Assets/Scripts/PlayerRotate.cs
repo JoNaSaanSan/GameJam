@@ -11,8 +11,7 @@ public class PlayerRotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-     transform.RotateAroundLocal(new Vector3(0, 1, 0), Time.deltaTime * 5 );
+     transform.Rotate(new Vector3(0, 1, 0) * Time.deltaTime * 140 );
 
-
-    }
+	}
 }

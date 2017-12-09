@@ -5,6 +5,7 @@ using UnityEngine;
 public class SelectCharacter : MonoBehaviour {
 
     public GameObject[] Characters = new GameObject[4];
+    public GameObject[] Hats = new GameObject[4];
     Rigidbody rigidbody;
     private int current;
 
@@ -29,15 +30,25 @@ public class SelectCharacter : MonoBehaviour {
     {
         Characters[current % Characters.Length].SetActive(false);
         current++;
-        Characters[current% Characters.Length].SetActive(true);
+        Characters[current % Characters.Length].SetActive(true);
         Debug.Log(current % Characters.Length);
     }
 
     public void Back()
     {
-        Characters[current % Characters.Length].SetActive(false);
+        Debug.Log((current % Characters.Length + Characters.Length) % Characters.Length);
+        Characters[(current % Characters.Length + Characters.Length) % Characters.Length].SetActive(false);
         current--;
-        Characters[current % Characters.Length].SetActive(true);
-        Debug.Log(current % Characters.Length);
+        Characters[(current % Characters.Length + Characters.Length) % Characters.Length].SetActive(true);
+        
     }
+
+    public void AddHat(int i)
+    {
+        if(Characters[current].transform.GetChildCount() == 2)
+        Destroy(Characters[current].transform.GetChild(1).gameObject);
+        GameObject hat = Instantiate(Hats[i], Characters[current].transform.GetChild(0).transform.position, Characters[current].transform.rotation);
+        hat.transform.parent = Characters[current].transform;
+    }
+
 }

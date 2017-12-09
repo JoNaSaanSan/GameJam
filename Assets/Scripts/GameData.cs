@@ -4,6 +4,7 @@
     private static GameData instance;
     private int score = 0;
     private int lives = 3;
+
     public bool Paused
     {
         get;

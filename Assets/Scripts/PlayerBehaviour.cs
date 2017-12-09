@@ -6,12 +6,17 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     // Starting health
-    public static float MAX_HEALTH = 100.0f;
+    public static float MAX_TOP_HEALTH = 100.0f;
+    public static float MAX_MID_HEALTH = 100.0f;
+    public static float MAX_BOTTOM_HEALTH = 100.0f;
 
     // Define how much damage is received at the top/bottom of the egg here (relative to the center of the egg)
     public static float TOP_DAMAGE_SCALAR = 0.4f;
+    public static float MID_DAMAGE_SCALAR = 1.0f;
     public static float BOTTOM_DAMAGE_SCALAR = 0.6f;
 
+    //
+    
 
     [System.Serializable]
     public class MoveSettings
@@ -42,9 +47,12 @@ public class PlayerBehaviour : MonoBehaviour
 
 
     // Player specific attributes
-    public float relPivotPointY = 1.0f / 3.0f;
-    public float playerHealth = 100.0f;
+    public float topHealth;
+    public float midHealth;
+    public float bottomHealth;
 
+    public float topRatio;
+    public float bottomRatio;
 
     //Spawn 
     public Transform spawnPoint;
@@ -62,13 +70,17 @@ public class PlayerBehaviour : MonoBehaviour
             inputSettings.FORWARD_AXIS = "Vertical";
             inputSettings.SIDEWAYS_AXIS = "Horizontal";
         }
+
+        topHealth = MAX_TOP_HEALTH;
+        midHealth = MAX_MID_HEALTH;
+        bottomHealth = MAX_BOTTOM_HEALTH;
+
         Spawn();
     }
 
     public void Spawn()
     {
         // transform.position = spawnPoint.position;
-        playerHealth = MAX_HEALTH;
     }
 
     void OnCollisionEnter(Collision collisionInfo)
@@ -78,6 +90,7 @@ public class PlayerBehaviour : MonoBehaviour
             Spawn();
         }
 
+        /*
         // Determine enemy damage dealer
         bool enemyDamageDealer;
         if(gameObject.tag == "player_1")
@@ -106,6 +119,8 @@ public class PlayerBehaviour : MonoBehaviour
             // The direct damage the player receives from the DamageDealer object
             //TODO: geschwindigkeit auch berücksichtigen
             float receivedDamage = dd.damageToDeal * MAX_HEALTH;
+
+            // Reduce
             //print("mag:" + (Mathf.Sqrt(collisionInfo.relativeVelocity.sqrMagnitude)));
 
             // Adjust the damage, as the egg is more robust at the ends
@@ -118,13 +133,15 @@ public class PlayerBehaviour : MonoBehaviour
             playerHealth -= receivedDamage;
 
             //print("Health: " + playerHealth);
-        }    
+        }    */
     }
 
 
     float calculateDamageScalar(float localCollisionYPosition)
     {
-        Vector3 boundingBoxSize = GetComponent<MeshFilter>().mesh.bounds.size;
+        return 0.0f;
+        /*Vector3 boundingBoxSize = GetComponent<MeshFilter>().mesh.bounds.size;
+        
         Vector3 objectSize = Vector3.Scale(transform.localScale, boundingBoxSize);
         float bottomLength = objectSize.y * relPivotPointY;
         float topLength = objectSize.y - bottomLength;
@@ -140,8 +157,63 @@ public class PlayerBehaviour : MonoBehaviour
         else
         {
             return 1.0f;
-        }
+        }*/
     }
+
+    public void receiveDamage(char bodyPart, Vector3 collisionPoint, float relativeDamage)
+    {
+        char tmpBodyPart;
+        if (bodyPart == 's')
+        {
+            Vector3 localCollisionPos = gameObject.transform.InverseTransformPoint(collisionPoint);
+            Bounds bounds = GetComponent<MeshFilter>().mesh.bounds;
+            Vector3 boundsSize = bounds.size;
+
+            float bottomSeperatorY = bounds.min.y + (bottomRatio * boundsSize.y);
+            float topSeperatorY = bounds.min.y + (topRatio * boundsSize.y);
+
+            if (localCollisionPos.y >= topSeperatorY)
+            {
+                tmpBodyPart = 't';
+            }
+            else if(localCollisionPos.y < topSeperatorY && localCollisionPos.y >= bottomSeperatorY)
+            {
+                tmpBodyPart = 'm';
+            }
+            else
+            {
+                tmpBodyPart = 'b';
+            }
+        }
+        else
+        {
+            tmpBodyPart = bodyPart;
+        }
+
+        //print(tmpBodyPart);
+
+        if(tmpBodyPart == 't')
+        {
+            topHealth -= TOP_DAMAGE_SCALAR * relativeDamage * MAX_TOP_HEALTH;
+        }
+        else if(tmpBodyPart == 'm')
+        {
+            midHealth -= MID_DAMAGE_SCALAR * relativeDamage * MAX_MID_HEALTH;
+        }
+        else if(tmpBodyPart == 'b')
+        {
+            bottomHealth -= BOTTOM_DAMAGE_SCALAR * relativeDamage * MAX_BOTTOM_HEALTH;
+        }
+
+        if(topHealth <= 0.0f || midHealth <= 0.0f || bottomHealth <= 0.0f)
+        {
+            // Lost!
+        }
+        //print("top: " + topHealth + "\n" +
+        //      "mid: " + midHealth + "\n" +
+        //      "bot: " + bottomHealth);
+    }
+
 
     void Awake()
     {
@@ -159,7 +231,7 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         // This test creates spikes on the player 2 egg wherever the mouse is
-
+        //print(GetComponent<MeshFilter>().mesh.bounds.max.y);
         /*
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
